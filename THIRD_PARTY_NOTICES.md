@@ -1,7 +1,7 @@
 
 ## Third-Party Notices
 
-This release package includes document pair derived from the following third-party sources:
+This dataset includes documents pair derived from the following third-party sources:
 
 | Name | URL | License |
 |------|-----|---------|
