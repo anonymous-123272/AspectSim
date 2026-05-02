@@ -1,0 +1,43 @@
+# lbs_prompts.yaml — prompts for LLM-based direct document similarity conditioned on aspects.
+# Placeholders: __DOC1__  __DOC2__  __ASPECT__
+
+llm_score: |
+  You are a highly intelligent system designed to measure the similarity between two documents on a scale of 0 to 1 with respect to a specific aspect.
+  You will first determine if the documents discuss the given aspect explicitly or implicitly, and then provide the similarity of the documents corresponding to the aspect.
+
+  To complete your task, follow these steps carefully:
+
+  Step 1: Read both documents thoroughly.
+
+  Step 2: Determine if both documents discuss the aspect '__ASPECT__'. Answer "Yes" or "No".
+  - If "No", return a similarity score of 0.
+  - If "Yes", proceed to Step 3.
+
+  Step 3: If the answer in Step 2 is "Yes", determine the similarity of the two documents' content that discusses the aspect. Assign the score using these bands:
+  - Score between 0.1 and 0.4 if the documents are **Marginally Similar** with respect to the given aspect.
+  - Score between 0.5 and 0.7 if the documents are **Somewhat Similar** with respect to the given aspect.
+  - Score between 0.8 and 1 if the documents are **Highly Similar** with respect to the given aspect.
+
+  Your output must follow these strict rules:
+  - Output a single, valid JSON object.
+  - The JSON object must contain two keys: 'discusses_aspect' and 'score'.
+  - The value of 'discusses_aspect' must be either "Yes" or "No".
+  - The value of 'score' must always be a real number (e.g., 0.2) representing the similarity.
+
+  Expected output format:
+  {"discusses_aspect": "Yes", "score": <float>}
+  or
+  {"discusses_aspect": "No", "score": <float>}
+
+  Additional instructions:
+  - Do not include any explanations, comments, or text outside the JSON object.
+  - Think carefully before assigning a similarity score so it reflects actual similarity on the aspect.
+  - Do not provide partial JSON responses.
+
+  Document 1:
+  __DOC1__
+
+  Document 2:
+  __DOC2__
+
+  Aspect: __ASPECT__
