@@ -1,0 +1,337 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "containedIn": "cr:containedIn",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "personalSensitiveInformation": "cr:personalSensitiveInformation",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "@type": "sc:Dataset",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "repo",
+      "name": "repo",
+      "description": "The Hugging Face git repository.",
+      "contentUrl": "https://huggingface.co/datasets/aspectsim/AspectSim-Evaluation-Benchmark/tree/refs%2Fconvert%2Fparquet",
+      "encodingFormat": "git+https",
+      "sha256": "https://github.com/mlcommons/croissant/issues/80"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "parquet-files-for-config-default",
+      "containedIn": {
+        "@id": "repo"
+      },
+      "encodingFormat": "application/x-parquet",
+      "includes": "default/*/*.parquet"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "dataType": "cr:Split",
+      "key": {
+        "@id": "default_splits/split_name"
+      },
+      "@id": "default_splits",
+      "name": "default_splits",
+      "description": "Splits for the default config.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default_splits/split_name",
+          "dataType": "sc:Text"
+        }
+      ],
+      "data": [
+        {
+          "default_splits/split_name": "train"
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "default",
+      "description": "aspectsim/AspectSim-Evaluation-Benchmark - 'default' subset",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default/split",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "fileProperty": "fullpath"
+            },
+            "transform": {
+              "regex": "default/(?:partial-)?(train)/.+parquet$"
+            }
+          },
+          "references": {
+            "field": {
+              "@id": "default_splits/split_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/domain",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "domain"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/aspect_type",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "aspect_type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/doc_n",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "doc_n"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/article1",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "article1"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/article2",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "article2"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/aspect",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "aspect"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/pair",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "pair"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/label",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "label"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/reason",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "reason"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "name": "AspectSim-Evaluation-Benchmark",
+  "description": "\n\t\n\t\t\n\t\tDataset Card for AspectSim\n\t\n\n\n\t\n\t\t\n\t\tDataset Details\n\t\n\n\n\t\n\t\t\n\t\tDataset Description\n\t\n\nAspectSim is a large-scale aspect-conditioned document-pair similarity evaluation benchmark. Each instance consists of two full documents, a natural-language aspect on which the comparison is based, and a human-interpretable similarity label on an ordinal scale. The benchmark spans five diverse domains: news, opinion, hotel reviews, medical literature, and scientific peer reviews, enabling… See the full description on the dataset page: https://huggingface.co/datasets/aspectsim/AspectSim-Evaluation-Benchmark.",
+  "alternateName": [
+    "aspectsim/AspectSim-Evaluation-Benchmark",
+    "AspectSim-Dataset"
+  ],
+  "creator": {
+    "@type": "Person",
+    "name": "aspectsim",
+    "url": "https://huggingface.co/aspectsim"
+  },
+  "keywords": [
+    "text-retrieval",
+    "text-classification",
+    "English",
+    "other",
+    "10K - 100K",
+    "csv",
+    "Text",
+    "Datasets",
+    "pandas",
+    "Polars",
+    "Croissant",
+    "🇺🇸 Region: US",
+    "semantic similarity",
+    "benchmark",
+    "aspect-based-similarity"
+  ],
+  "license": "https://choosealicense.com/licenses/other/",
+  "url": "https://huggingface.co/datasets/aspectsim/AspectSim-Evaluation-Benchmark",
+  "rai:dataLimitations": "- The dataset is English only and does not support multilingual or cross-lingual evaluation\n- The benchmark spans five domains and approximately 26K instances; generalization to other domains or text types is not guaranteed.\n- Aspects were generated from existing multi-document corpora and may not fully reflect the range of user-defined or fine-grained perspectives encountered in practice.\n- Only 10% of the data was manually validated by human annotators; the remaining annotations may contain noisy or ambiguous labels, particularly for borderline cases between Somewhat Similar and Marginally Similar\n- This dataset is not recommended for high-stakes decision-making, biometric identification, legal judgments, or any application requiring certified human ground truth labels",
+  "rai:dataBiases": "- Aspects and similarity labels were generated by GPT-4o, which may introduce model-specific biases in what constitutes aspect-relevant content\n  - News and opinion text in the AllSides and Wiki domains may reflect temporal, political, and cultural biases present in those sources\n  - The five source domains are not equally represented in size, which may lead to domain imbalance in model training or evaluation\n  - GPT-4o may systematically favor certain types of aspects or similarity patterns that do not reflect the full diversity of human judgment",
+  "rai:personalSensitiveInformation": "- Documents are drawn from publicly available sources and contain no intentional inclusion of personal identifiers\n  - The hotel and user opinion domain may contain user-generated content that could incidentally include personal opinions or experiences\n  - The medical literature domain (MSLR) contains aggregated scientific text and does not include individual patient data\n  - Users should screen for personally identifiable information before redistribution or fine-tuning on sensitive downstream tasks",
+  "rai:dataUseCases": "- Construct validity: the dataset is designed to measure aspect-conditioned document similarity, capturing how similarly two documents discuss a specific aspect rather than their overall topical overlap. Evidence for construct validity comes from strong human-human agreement (κ ≈ 0.905) in the aspect-aware setting and 94.2% label accuracy against human gold annotations (95% CI 93.3-95.1%)\n  - Established use cases include benchmarking aspect-aware similarity models, evaluating LLM-based similarity assessment pipelines, and meta-evaluation of embedding-based similarity metrics",
+  "rai:dataSocialImpact": "- Positive impacts include enabling more fine-grained and interpretable document similarity assessment, supporting the development of aspect-aware NLP tools for clinical, legal, and scientific domains, and promoting accessible NLP research through a standardized multi-domain benchmark\n  - Potential negative impacts include the risk of over-reliance on automated similarity metrics in high-stakes domains such as clinical or legal text comparison without sufficient human oversight\n  - GPT-4o involvement in data generation means that biases in that model could propagate to downstream systems trained or evaluated on this benchmark\n  - Mitigation: rigorous human validation (94.2% label accuracy) was conducted to minimize label noise and bias propagation",
+  "rai:hasSyntheticData": false,
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "https://github.com/complementizer/wcep-mds-dataset",
+      "prov:label": "Wikipedia Current Events Portal (WCEP)",
+      "sc:license": "MIT license"
+    },
+    {
+      "@id": "https://huggingface.co/datasets/allenai/mslr2022",
+      "prov:label": "Medical Studies Literature Review Summarization (MSLR)",
+      "sc:license": "Apache-2.0 license",
+      "prov:wasAttributedTo": {
+        "prov:label": "AllenAI"
+      }
+    },
+    {
+      "@id": "https://karmake2.github.io/files/Publications/2022/SOFSAT_Data.zip",
+      "prov:label": "Argumentative Political Documents (AllSides)",
+      "sc:license": "MIT license"
+    },
+    {
+      "@id": "https://github.com/BridgeAI-Lab/LLM-as-Meta-Reviewer",
+      "prov:label": "Scientific Peer Reviews (Peer)",
+      "sc:license": "MIT license"
+    },
+    {
+      "@id": "https://github.com/megagonlabs/cocosum/tree/main",
+      "prov:label": "User Opinion Summarization (Hotel)",
+      "sc:license": "Apache-2.0 license"
+    }
+  ],
+  "prov:wasGeneratedBy": [
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q4929239"
+      },
+      "sc:description": "Document pairs were sampled from five publicly available multi-document summarization corpora spanning news, opinion, medical literature, scientific peer reviews, and user-generated content. Pairs were selected within a pairwise similarity range of 0.6-0.9 to ensure topical coherence while avoiding trivial or unrelated pairs. Approximately 2,100 document pairs were sampled across all five domains."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q109719325"
+      },
+      "sc:description": "Similarity labels were generated using GPT-4o following a structured three-stage process: (i) aspect identification: extracting salient aspects discussed in both documents; (ii) aspect-conditioned evidence extraction: independently extracting the most relevant textual evidence for each aspect from each document; (iii) similarity label assignment: comparing extracted evidence pairs and assigning an ordinal label from the set: Highly Similar, Somewhat Similar, Marginally Similar, Not Found. Negative instances where aspects appear in only one document were also generated. Labeling schema and annotation guidelines are provided in the accompanying paper."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q3306762"
+      },
+      "sc:description": "A randomly stratified 10% subset (2,536 instances) across all five domains was independently annotated by two expert human annotators with backgrounds in NLP/AI research and computational linguistics, respectively. Annotators were provided with detailed annotation guidelines and assessed similarity based solely on the provided aspect without exposure to GPT-4o-generated labels. Human-human agreement reached κ ≈ 0.905 in the aspect-aware setting. GPT-4o silver labels were verified against human gold annotations, achieving 94.2% accuracy (95% CI: 93.3-95.1% ± 0.91%), confirming the reliability of the silver standard labels."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q5227332"
+      },
+      "sc:description": "Document pairs were filtered to ensure a minimum document length of 11 sentences. Aspect-conditioned evidence extraction was performed independently for each document to avoid cross-contamination. All postprocessing scripts are available in the accompanying code repository."
+    }
+  ]
+}
